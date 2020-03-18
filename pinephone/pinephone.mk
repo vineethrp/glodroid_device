@@ -14,7 +14,7 @@ PRODUCT_MANUFACTURER := Pine64
 UBOOT_DEFCONFIG := sopine_baseboard_defconfig
 ATF_PLAT        := sun50i_a64
 
-KERNEL_DEFCONFIG := device/glodroid/platform/common/sunxi/sunxi64_defconfig
+KERNEL_DEFCONFIG := device/glodroid/platform/common/sunxi/pinephone_defconfig
 KERNEL_FRAGMENTS := \
     device/glodroid/platform/common/sunxi/sunxi-common.config \
     device/glodroid/pinephone/kernel.config \
