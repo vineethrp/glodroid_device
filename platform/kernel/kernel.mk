@@ -10,14 +10,14 @@ ifeq ($(TARGET_PREBUILT_KERNEL),)
 ifeq ($(TARGET_KERNEL_CLANG_COMPILE), true)
 KERNAL_CLANG := prebuilts/clang/host/linux-x86/clang-r353983c/bin/clang
 CLANG_TRIPLE := aarch64-linux-gnu-
-CROSS_COMPILE := prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+KMAKE_CROSS_COMPILE := prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
 KMAKE_COMMON := \
     PATH=/usr/bin:/bin:$$PATH \
     $(MAKE) \
     ARCH=$(TARGET_ARCH) \
     CC=$$(readlink -f $(KERNEL_CLANG)) \
     CLANG_TRIPLE=$(CLANG_TRIPLE) \
-    CROSS_COMPILE=$$(readlink -f $(CROSS_COMPILE)) \
+    CROSS_COMPILE=$$(readlink -f $(KMAKE_CROSS_COMPILE)) \
 else
 KMAKE_COMMON := $(MAKE_COMMON)
 endif
@@ -119,7 +119,11 @@ $(PRODUCT_OUT)/kernel: $(KERNEL_IMAGE) $(KERNEL_MODULES_OUT)
 
 #-------------------------------------------------------------------------------
 
+ifeq ($(TARGET_NO_CUSTOM_RTL8189),)
 include $(LOCAL_PATH)/rtl8189ftv-mod.mk
+endif
+ifeq ($(TARGET_NO_CUSTOM_RTL8723CS),)
 include $(LOCAL_PATH)/rtl8723cs-mod.mk
+endif
 
 endif # TARGET_PREBUILT_KERNEL
