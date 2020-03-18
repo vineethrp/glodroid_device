@@ -120,7 +120,11 @@ $(PRODUCT_OUT)/kernel: $(KERNEL_IMAGE) $(KERNEL_MODULES_OUT)
 
 #-------------------------------------------------------------------------------
 
+ifeq ($(TARGET_NO_CUSTOM_RTL8189),)
 include $(LOCAL_PATH)/rtl8189ftv-mod.mk
+endif
+ifeq ($(TARGET_NO_CUSTOM_RTL8723CS),)
 include $(LOCAL_PATH)/rtl8723cs-mod.mk
+endif
 
 endif # TARGET_PREBUILT_KERNEL

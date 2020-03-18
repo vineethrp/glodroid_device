@@ -25,3 +25,5 @@ DEVICE_MANIFEST_FILE += device/glodroid/pinephone/manifest.xml
 BOARD_VENDOR_SEPOLICY_DIRS += device/glodroid/pinephone/sepolicy/vendor
 
 TARGET_KERNEL_CLANG_COMPILE := true
+TARGET_NO_CUSTOM_RTL8189 := true
+TARGET_NO_CUSTOM_RTL8723CS := true
