@@ -6,6 +6,22 @@ LOCAL_PATH := $(call my-dir)
 ifeq ($(TARGET_PREBUILT_KERNEL),)
 
 #-------------------------------------------------------------------------------
+
+ifeq ($(TARGET_KERNEL_CLANG_COMPILE), true)
+KERNAL_CLANG := prebuilts/clang/host/linux-x86/clang-r353983c/bin/clang
+CLANG_TRIPLE := aarch64-linux-gnu-
+CROSS_COMPILE := prebuilts/gcc/linux-x86/aarch64/aarch64-linux-android-4.9/bin/aarch64-linux-android-
+KMAKE_COMMON := \
+    PATH=/usr/bin:/bin:$$PATH \
+    $(MAKE) \
+    ARCH=$(TARGET_ARCH) \
+    CC=$$(readlink -f $(KERNEL_CLANG)) \
+    CLANG_TRIPLE=$(CLANG_TRIPLE) \
+    CROSS_COMPILE=$$(readlink -f $(CROSS_COMPILE)) \
+else
+KMAKE_COMMON := $(MAKE_COMMON)
+endif
+
 KERNEL_SRC		:= kernel/glodroid
 KERNEL_FRAGMENTS	+= \
     $(LOCAL_PATH)/android-base.config \
@@ -45,7 +61,7 @@ MKDTBOIMG		:= $(HOST_OUT_EXECUTABLES)/mkdtboimg.py
 GEN_DTBCFG		:= $(PRODUCT_OUT)/gen/DTBO/dtbo.cfg
 
 KMAKE := \
-    $(MAKE_COMMON) \
+    $(KMAKE_COMMON) \
     -C $(KERNEL_SRC) O=$$(readlink -f $(KERNEL_OUT)) \
     DTC_FLAGS='--symbols' \
 
