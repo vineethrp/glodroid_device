@@ -11,7 +11,7 @@ PRODUCT_BRAND := Pine64
 PRODUCT_MODEL := PinePhone
 PRODUCT_MANUFACTURER := Pine64
 
-UBOOT_DEFCONFIG := sopine_baseboard_defconfig
+UBOOT_DEFCONFIG := pinephone_defconfig
 ATF_PLAT        := sun50i_a64
 
 KERNEL_DEFCONFIG := device/glodroid/platform/common/sunxi/pinephone_defconfig
