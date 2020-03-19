@@ -2,6 +2,9 @@
 #
 # Copyright (C) 2020 Roman Stratiienko (r.stratiienko@gmail.com)
 
+GAPPS_VARIANT := nano
+GAPPS_FORCE_PACKAGE_OVERRIDES := true
+
 $(call inherit-product, $(SRC_TARGET_DIR)/product/core_64_bit.mk)
 $(call inherit-product, device/glodroid/common/device-common.mk)
 
@@ -27,3 +30,5 @@ PRODUCT_PACKAGES += \
 
 PRODUCT_PACKAGES += \
     android.hardware.vibrator@1.0-service.pinephone
+
+$(call inherit-product, vendor/opengapps/build/opengapps-packages.mk)
